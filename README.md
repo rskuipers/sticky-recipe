@@ -6,10 +6,10 @@ Very useful to keep track of how much you've gathered and remind you what you're
 
 For the multiplayer version: https://github.com/rskuipers/sticky-recipe/tree/dst
 
-CHANGELOG
+## Changelog
 
-1.1.1
+### 1.1.1
 - Make compatible with Shipwrecked
 
-1.1.0 
+### 1.1.0 
 - Put the popup in the bottom left corner instead of behind the backpack
