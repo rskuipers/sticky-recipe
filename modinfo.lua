@@ -22,6 +22,6 @@ configuration_options=
 			{description = "Original (Default)", data = "original"},
 			{description = "Modified (Vertical)", data = "modified"}, --Build & Unsticky located below the item formulae instead of on the side
 		},
-		Default = "original"
+		default = "original"
 	},
 }
