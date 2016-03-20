@@ -16,8 +16,8 @@ function RecipePopup:Refresh()
 		self.stickybutton = self.contents:AddChild(ImageButton(UI_ATLAS, "button.tex", "button_over.tex", "button_disabled.tex"))
 		self.stickybutton:SetScale(1, 1, 1)
 		self.stickybutton:SetPosition(320, -175, 0)
-	    self.stickybutton:SetOnClick(function() GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup:MakeSticky(self.recipe, self.owner) end)
-	    self.stickybutton:Show()
+		self.stickybutton:SetOnClick(function() GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup:MakeSticky(self.recipe, self.owner) end)
+		self.stickybutton:Show()
 		self.stickybutton:SetText("STICKY")
 		self.stickybutton:Enable()
 	else
@@ -31,16 +31,16 @@ end
 local function PositionStickyRecipePopup(controls, screensize, hudscale)
 	w = 130
 	h = 380
-	offset = {-80, -150} -- -80 -150
+	offset = {-80, -150}
 	
 	if (STICKYRECIPE_OptionPos == "original") then verticalpos = 0 else verticalpos = 20 end
 
-  	controls.stickyrecipepopup:SetVAnchor(GLOBAL.ANCHOR_BOTTOM)
-  	controls.stickyrecipepopup:SetHAnchor(GLOBAL.ANCHOR_LEFT)
+	controls.stickyrecipepopup:SetVAnchor(GLOBAL.ANCHOR_BOTTOM)
+	controls.stickyrecipepopup:SetHAnchor(GLOBAL.ANCHOR_LEFT)
  
 	controls.stickyrecipepopup:SetPosition(
 		offset[1],
-		verticalpos --20
+		verticalpos
 	)
 
 	controls.stickyrecipepopup:SetScale(hudscale*.8, hudscale*.8, hudscale*.8)
