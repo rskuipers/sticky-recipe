@@ -26,7 +26,7 @@ local StickyRecipePopup = Class(RecipePopup, function(self, horizontal)
 	self.unstickybutton:SetPosition(unstickyhpos, unstickyvpos)
 	self.unstickybutton:SetOnClick(function() self:Hide() end)
 	self.unstickybutton:Show()
-	self.unstickybutton:SetText("UNSTICKY")
+	self.unstickybutton:SetText("Unsticky")
 	self.unstickybutton:Enable()
 end)
 

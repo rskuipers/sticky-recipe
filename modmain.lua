@@ -18,7 +18,7 @@ function RecipePopup:Refresh()
 		self.stickybutton:SetPosition(320, -175, 0)
 		self.stickybutton:SetOnClick(function() GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup:MakeSticky(self.recipe, self.owner) end)
 		self.stickybutton:Show()
-		self.stickybutton:SetText("STICKY")
+		self.stickybutton:SetText("Sticky")
 		self.stickybutton:Enable()
 	else
 		if (GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup == nil) then
