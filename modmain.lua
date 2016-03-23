@@ -2,7 +2,7 @@ local require = GLOBAL.require
 
 require "simutil"
 require "constants"
--- require "prefabs/player_common" -- do we need this ???
+require "prefabs/player_common" -- do we need this ???
 
 local ImageButton = require "widgets/imagebutton"
 local RecipePopup = require "widgets/recipepopup"
