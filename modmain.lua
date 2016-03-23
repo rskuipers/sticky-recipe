@@ -26,7 +26,11 @@ local function onpreload(inst, data) -- or onload(inst, data) ???
 	end
 end
 local function onsave(inst, data)
-	data.stickiedrecipe = inst.stickiedrecipe
+	if data then
+		if data.stickiedrecipe then
+			data.stickiedrecipe = inst.stickiedrecipe
+		end
+	end
 end
 
 function RecipePopup:Refresh()
