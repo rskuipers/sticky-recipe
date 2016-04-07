@@ -2,33 +2,26 @@ local require = GLOBAL.require
 
 require "simutil"
 require "constants"
-require "prefabs/player_common" -- do we need this ???
+-- require "prefabs/player_common" -- do we need this ???
 
 local ImageButton = require "widgets/imagebutton"
 local RecipePopup = require "widgets/recipepopup"
 local StickyRecipePopup = require "widgets/stickyrecipepopup"
 local RecipePopup_Refresh_base = RecipePopup.Refresh or function() return "" end
 local STICKYRECIPE_OptionPos = GetModConfigData("StickyRecipePopup_AltPos") or "original"
--- local inst = GLOBAL.GetPlayer() -- needed or not ?
--- so I was watching the characters making lua and they save & preload on inst without any declaration, and without any components so let's see what it gives
--- inst:AddComponent("stickiedrecipe") -- add component
 
--- mockup of what needs doing that I don't know how to start
---on game load
---  if not inst.components.stickiedrecipe.value then display / make sticky end
---end 
-local function onpreload(inst, data) -- or onload(inst, data) ???
+local function onload(inst, data) -- on preload or onload ???
 	if data then
 		if data.stickiedrecipe then
-			inst.stickiedrecipe = data.stickiedrecipe
-			GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup:Refresh() --call a refresh of the screen
+			GLOBAL.GetPlayer().stickiedrecipe = data.stickiedrecipe --get back saved data
+			GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup:Refresh() --call a refresh of the screen ???
 		end
 	end
 end
 local function onsave(inst, data)
 	if data then
 		if data.stickiedrecipe then
-			data.stickiedrecipe = inst.stickiedrecipe
+			data.stickiedrecipe = GLOBAL.GetPlayer().stickiedrecipe --save data
 		end
 	end
 end
@@ -36,13 +29,14 @@ end
 function RecipePopup:Refresh()
 	RecipePopup_Refresh_base(self)
 	
-		
 	if self.stickybutton == nil then
 		self.stickybutton = self.contents:AddChild(ImageButton(UI_ATLAS, "button.tex", "button_over.tex", "button_disabled.tex"))
 		self.stickybutton:SetScale(1, 1, 1)
 		self.stickybutton:SetPosition(320, -175, 0)
-		--this should work right ? inst.components.stickiedrecipe.value
-		self.stickybutton:SetOnClick(function() GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup:MakeSticky(self.recipe, self.owner);inst.stickiedrecipe = self.recipe end)
+		
+		self.stickybutton:SetOnClick(function() GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup:MakeSticky(self.recipe, self.owner)
+				GLOBAL.GetPlayer().stickiedrecipe = self.recipe --this should work right ?  saves value of stickied recipe to player variable
+			end)
 		self.stickybutton:Show()
 		self.stickybutton:SetText("Sticky")
 		self.stickybutton:Enable()
@@ -52,9 +46,8 @@ function RecipePopup:Refresh()
 		end
 		GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup:Refresh()
 	end
-	-- not actually sure I should put it here, or should I put it inside the "setonclick()" above
-	-- inst.components.stickiedrecipe.value = self.recipe -- save value of stickied recipe
-	-- disabled for now, pretty sure I should put it above.
+	-- alternate position ?
+	-- GLOBAL.GetPlayer().stickiedrecipe.value = self.recipe
 end
 
 local function PositionStickyRecipePopup(controls, screensize, hudscale)
