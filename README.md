@@ -8,6 +8,9 @@ For the singleplayer version: https://github.com/rskuipers/sticky-recipe/tree/ds
 
 ## Changelog
 
+### 1.1.3
+- Fix sticky button not showing sometimes due to the introduction of skins
+
 ### 1.1.2
 - Fix crash caused by new UI
 
