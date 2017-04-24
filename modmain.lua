@@ -18,7 +18,7 @@ function RecipePopup:Refresh()
     if self.stickybutton == nil or self.stickybutton.parent == nil then
         self.stickybutton = self.contents:AddChild(ImageButton())
         self.stickybutton:SetScale(1, 1, 1)
-        if #self.skins_options == 1 then
+        if self.skins_options ~= nil and #self.skins_options == 1 then
             self.stickybutton:SetPosition(320, -185, 0)
         else
             self.stickybutton:SetPosition(320, -225, 0)
