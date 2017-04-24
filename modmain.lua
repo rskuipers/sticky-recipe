@@ -8,18 +8,27 @@ local RecipePopup = require "widgets/recipepopup"
 local StickyRecipePopup = require "widgets/stickyrecipepopup"
 local RecipePopup_Refresh_base = RecipePopup.Refresh or function() return "" end
 
+GLOBAL.CHEATS_ENABLED = true
+GLOBAL.require( 'debugkeys' )
+
 function RecipePopup:Refresh()
+    print(self.name:GetString())
     RecipePopup_Refresh_base(self)
     
-    if self.stickybutton == nil then
+    if self.stickybutton == nil or self.stickybutton.parent == nil then
         self.stickybutton = self.contents:AddChild(ImageButton())
         self.stickybutton:SetScale(1, 1, 1)
-        self.stickybutton:SetPosition(320, -175, 0)
+        if #self.skins_options == 1 then
+            self.stickybutton:SetPosition(320, -185, 0)
+        else
+            self.stickybutton:SetPosition(320, -225, 0)
+        end
         self.stickybutton:SetOnClick(function() GLOBAL.ThePlayer.HUD.controls.stickyrecipepopup:MakeSticky(self.recipe, self.owner) end)
         self.stickybutton:Show()
-        self.stickybutton:SetText("STICKY")
+        self.stickybutton:SetText("Sticky")
         self.stickybutton:Enable()
     else
+
         GLOBAL.ThePlayer.HUD.controls.stickyrecipepopup:Refresh()
     end
 end
@@ -27,14 +36,10 @@ end
 local function PositionStickyRecipePopup(controls, hudscale)
     local offset = {-80, -150}
 
-      controls.stickyrecipepopup:SetVAnchor(GLOBAL.ANCHOR_BOTTOM)
-      controls.stickyrecipepopup:SetHAnchor(GLOBAL.ANCHOR_LEFT)
+    controls.stickyrecipepopup:SetVAnchor(GLOBAL.ANCHOR_BOTTOM)
+    controls.stickyrecipepopup:SetHAnchor(GLOBAL.ANCHOR_LEFT)
  
-    controls.stickyrecipepopup:SetPosition(
-        offset[1],
-        0
-    )
-
+    controls.stickyrecipepopup:SetPosition(offset[1], 0)
     controls.stickyrecipepopup:SetScale(hudscale*.8, hudscale*.8, hudscale*.8)
 end
 
