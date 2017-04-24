@@ -1,7 +1,7 @@
 name = "Sticky Recipe"
 description = "Makes a recipe sticky to remind you what you are working on"
 author = "rskuipers"
-version = "1.1.2"
+version = "1.1.3"
 forumthread = "/"
 icon_atlas = "modicon.xml"
 icon = "modicon.tex"
