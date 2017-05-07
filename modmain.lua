@@ -8,16 +8,13 @@ local RecipePopup = require "widgets/recipepopup"
 local StickyRecipePopup = require "widgets/stickyrecipepopup"
 local RecipePopup_Refresh_base = RecipePopup.Refresh or function() return "" end
 
-GLOBAL.CHEATS_ENABLED = true
-GLOBAL.require( 'debugkeys' )
-
 function RecipePopup:Refresh()
     print(self.name:GetString())
     RecipePopup_Refresh_base(self)
     
     if self.stickybutton == nil or self.stickybutton.parent == nil then
         self.stickybutton = self.contents:AddChild(ImageButton())
-        self.stickybutton:SetScale(1, 1, 1)
+        self.stickybutton.image:SetScale(.45, .7)
         if self.skins_options ~= nil and #self.skins_options == 1 then
             self.stickybutton:SetPosition(320, -185, 0)
         else
@@ -28,7 +25,6 @@ function RecipePopup:Refresh()
         self.stickybutton:SetText("Sticky")
         self.stickybutton:Enable()
     else
-
         GLOBAL.ThePlayer.HUD.controls.stickyrecipepopup:Refresh()
     end
 end
@@ -72,4 +68,4 @@ local function AddStickyRecipePopup(controls)
     end)
 end
 
-AddClassPostConstruct( "widgets/controls", AddStickyRecipePopup )
+AddClassPostConstruct("widgets/controls", AddStickyRecipePopup)
