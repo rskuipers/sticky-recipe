@@ -8,6 +8,9 @@ For the singleplayer version: https://github.com/rskuipers/sticky-recipe/tree/ds
 
 ## Changelog
 
+### 1.1.6
+- Remove debugging statement
+
 ### 1.1.5
 - Fixed the popup for items with skins
 
