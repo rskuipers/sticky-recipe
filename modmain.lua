@@ -9,7 +9,6 @@ local StickyRecipePopup = require "widgets/stickyrecipepopup"
 local RecipePopup_Refresh_base = RecipePopup.Refresh or function() return "" end
 
 function RecipePopup:Refresh()
-    print(self.name:GetString())
     RecipePopup_Refresh_base(self)
     
     if self.stickybutton == nil or self.stickybutton.parent == nil then
