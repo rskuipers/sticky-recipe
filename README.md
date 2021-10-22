@@ -8,6 +8,9 @@ For the multiplayer version: https://github.com/rskuipers/sticky-recipe/tree/dst
 
 ## Changelog
 
+### 1.1.6
+- Remove debugging statement
+
 ### 1.1.2
 - Add configuration for alternative layout (thanks [@whismerhill](https://github.com/whismerhill))
 - Change UNSTICKY and STICKY to Unsticky and Sticky respectively
