@@ -2,12 +2,29 @@ local require = GLOBAL.require
 
 require "simutil"
 require "constants"
+-- require "prefabs/player_common" -- do we need this ???
 
 local ImageButton = require "widgets/imagebutton"
 local RecipePopup = require "widgets/recipepopup"
 local StickyRecipePopup = require "widgets/stickyrecipepopup"
 local RecipePopup_Refresh_base = RecipePopup.Refresh or function() return "" end
 local STICKYRECIPE_OptionPos = GetModConfigData("StickyRecipePopup_AltPos") or "original"
+
+local function onload(inst, data) -- on preload or onload ???
+	if data then
+		if data.stickiedrecipe then
+			GLOBAL.GetPlayer().stickiedrecipe = data.stickiedrecipe --get back saved data
+			GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup:Refresh() --call a refresh of the screen ???
+		end
+	end
+end
+local function onsave(inst, data)
+	if data then
+		if data.stickiedrecipe then
+			data.stickiedrecipe = GLOBAL.GetPlayer().stickiedrecipe --save data
+		end
+	end
+end
 
 function RecipePopup:Refresh()
 	RecipePopup_Refresh_base(self)
@@ -16,7 +33,10 @@ function RecipePopup:Refresh()
 		self.stickybutton = self.contents:AddChild(ImageButton(UI_ATLAS, "button.tex", "button_over.tex", "button_disabled.tex"))
 		self.stickybutton:SetScale(1, 1, 1)
 		self.stickybutton:SetPosition(320, -175, 0)
-		self.stickybutton:SetOnClick(function() GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup:MakeSticky(self.recipe, self.owner) end)
+		
+		self.stickybutton:SetOnClick(function() GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup:MakeSticky(self.recipe, self.owner)
+				GLOBAL.GetPlayer().stickiedrecipe = self.recipe --this should work right ?  saves value of stickied recipe to player variable
+			end)
 		self.stickybutton:Show()
 		self.stickybutton:SetText("Sticky")
 		self.stickybutton:Enable()
@@ -26,6 +46,8 @@ function RecipePopup:Refresh()
 		end
 		GLOBAL.GetPlayer().HUD.controls.stickyrecipepopup:Refresh()
 	end
+	-- alternate position ?
+	-- GLOBAL.GetPlayer().stickiedrecipe.value = self.recipe
 end
 
 local function PositionStickyRecipePopup(controls, screensize, hudscale)
